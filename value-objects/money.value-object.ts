@@ -10,6 +10,10 @@ export default class Money {
       throw new Error('amountInCents must be an integer')
     }
 
+    if (amountInCents < 0) {
+      throw new Error('amountInCents must be more than 0')
+    }
+
     this._amountInCents = amountInCents
   }
 
@@ -35,17 +39,25 @@ export default class Money {
     return new Money(amountInCents)
   }
 
-  static add(...args: Money[]) {
-    if (args.length < 2) {
-      throw new Error('at least two values must be provided to perform addition')
+  static add(m1: Money, m2: Money) {
+    return Money.createFromCents(m2.amountInCents + m1.amountInCents)
+  }
+
+  static subtract(m1: Money, m2: Money) {
+    if (m1.lessThan(m2)) {
+      throw new Error(
+        `Cannot subtract more money than there currently is. Trying to subtract ${m1.amount} from ${m2.amount}`
+      )
     }
 
-    let result = args[0]
+    return Money.createFromCents(m1.amountInCents - m2.amountInCents)
+  }
 
-    for (let i = 1; i < args.length; i++) {
-      result = Money.createFromCents(result.amountInCents + args[i].amountInCents)
-    }
+  greaterThan(m: Money) {
+    return this._amountInCents > m.amountInCents
+  }
 
-    return result
+  lessThan(m: Money) {
+    return this._amountInCents < m.amountInCents
   }
 }

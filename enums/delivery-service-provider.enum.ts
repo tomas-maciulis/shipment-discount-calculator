@@ -1,6 +1,6 @@
-enum DeliverServiceProvider {
+enum DeliveryServiceProvider {
   LP = 'La Poste',
   MR = 'Mondial Relay',
 }
 
-export default DeliverServiceProvider
+export default DeliveryServiceProvider

@@ -1,12 +1,12 @@
 import DeliveryService from '../value-objects/delivery-service.value-object'
-import DeliverServiceProvider from '../enums/delivery-service-provider.enum'
+import DeliveryServiceProvider from '../enums/delivery-service-provider.enum'
 import ParcelType from '../enums/parcel-type.enum'
 import Money from '../value-objects/money.value-object'
 
 export default abstract class DeliveryServiceProviderBase {
   protected _services: DeliveryService[]
 
-  protected abstract _name: DeliverServiceProvider
+  protected abstract _name: DeliveryServiceProvider
 
   protected registerService(service: ParcelType, price: Money) {
     this._services.push(new DeliveryService(service, price))

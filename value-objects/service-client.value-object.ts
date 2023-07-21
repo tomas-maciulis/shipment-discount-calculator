@@ -1,6 +1,6 @@
-import ShipmentOrder from './shipment-order.value-object'
+import DeliveryOrder from './delivery-order.value-object'
 
 export default class ServiceClient {
-  constructor(readonly shipmentOrders: ShipmentOrder[]) {
+  constructor(readonly deliveryOrders: DeliveryOrder[]) {
   }
 }

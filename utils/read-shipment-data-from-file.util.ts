@@ -1,4 +1,4 @@
-import ShipmentOrder from '../value-objects/shipment-order.value-object'
+import DeliveryOrder from '../value-objects/delivery-order.value-object'
 import fs from 'fs'
 
 const readShipmentDataFromFile = (fileDir = 'input.txt') => {
@@ -7,7 +7,7 @@ const readShipmentDataFromFile = (fileDir = 'input.txt') => {
   const dataEntries = []
 
   for (const line of data.split('\n')) {
-    dataEntries.push(new ShipmentOrder(line))
+    dataEntries.push(new DeliveryOrder(line))
   }
 
   return dataEntries
