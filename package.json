@@ -1,0 +1,18 @@
+{
+  "name": "shipping-price-calculator",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "execute": "node dist/index.js",
+    "build": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "test": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "typescript": "^5.1.6"
+  }
+}
