@@ -1,14 +1,14 @@
-import {ShipmentSize} from '../enums/ShipmentSize.enum'
-import {ShipmentProvider} from '../enums/ShipmentProvider.enum'
+import {ParcelType} from '../enums/parcel-type.enum'
+import {DeliverServiceProvider} from '../enums/delivery-service-provider.enum'
 
 export default class ShipmentOrder {
   private readonly _isValid: boolean
 
   private _date: Date
 
-  private _size: ShipmentSize
+  private _size: Parcel
 
-  private _provider: ShipmentProvider
+  private _provider: DeliverServiceProvider
 
   constructor(private _data: string) {
     this._isValid = this.validateData()
@@ -19,17 +19,17 @@ export default class ShipmentOrder {
   }
 
   private validateData() {
-    const { date, size, provider } = this.getFields()
+    const {date, size, provider} = this.getFields()
 
     if (isNaN(new Date(date).valueOf())) {
       return false
     }
 
-    if (!Object.values(ShipmentSize).includes(size as any)) {
+    if (!Object.values(Parcel).includes(size as any)) {
       return false
     }
 
-    if (!Object.values(ShipmentProvider).includes(provider as any)) {
+    if (!Object.values(DeliverServiceProvider).includes(provider as any)) {
       return false
     }
 
@@ -37,11 +37,11 @@ export default class ShipmentOrder {
   }
 
   private setData() {
-    const { date, size, provider } = this.getFields()
+    const {date, size, provider} = this.getFields()
 
     this._date = new Date(date)
-    this._size = size as ShipmentSize
-    this._provider = provider as ShipmentProvider
+    this._size = size as Parcel
+    this._provider = provider as DeliverServiceProvider
   }
 
   private getFields() {
@@ -49,7 +49,7 @@ export default class ShipmentOrder {
 
     const [date, size, provider] = entries
 
-    return { date, size, provider }
+    return {date, size, provider}
   }
 
   get data() {
