@@ -1,3 +1,5 @@
-import readShipmentDataFromFile from './utils/ReadShipmentDataFromFile.util'
+import readShipmentDataFromFile from './utils/read-shipment-data-from-file.util'
+import ServiceClient from './value-objects/service-client.value-object'
 
-const shipmentData = readShipmentDataFromFile(process.argv[2])
+const serviceClient = new ServiceClient(readShipmentDataFromFile(process.argv[2]))
+

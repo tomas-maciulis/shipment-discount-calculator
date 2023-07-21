@@ -1,7 +1,7 @@
 import {ShipmentSize} from '../enums/ShipmentSize.enum'
 import {ShipmentProvider} from '../enums/ShipmentProvider.enum'
 
-export default class ShipmentDataEntryValueObject {
+export default class ShipmentOrder {
   private readonly _isValid: boolean
 
   private _date: Date
@@ -25,11 +25,11 @@ export default class ShipmentDataEntryValueObject {
       return false
     }
 
-    if (!Object.values(ShipmentSize).includes(size as ShipmentSize)) {
+    if (!Object.values(ShipmentSize).includes(size as any)) {
       return false
     }
 
-    if (!Object.values(ShipmentProvider).includes(provider as ShipmentProvider)) {
+    if (!Object.values(ShipmentProvider).includes(provider as any)) {
       return false
     }
 
