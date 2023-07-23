@@ -3,6 +3,7 @@ import getNumberPrecision from '../utils/get-number-precision.util'
 const PRECISION = 2
 
 export default class Money {
+  // todo: refactor all _x to private javascript props
   private readonly _amountInCents: number
 
   private constructor(amountInCents: number) {
@@ -19,6 +20,10 @@ export default class Money {
 
   get amount() {
     return this._amountInCents / 10 ** PRECISION
+  }
+
+  get amountString() {
+    return this.amount.toFixed(PRECISION)
   }
 
   get amountInCents() {
@@ -39,16 +44,20 @@ export default class Money {
     return new Money(amountInCents)
   }
 
-  static add(m1: Money, m2: Money) {
-    return Money.createFromCents(m2.amountInCents + m1.amountInCents)
+  copy() {
+    return Money.createFromCents(this._amountInCents)
   }
 
-  static subtract(m1: Money, m2: Money) {
-    if (m1.lessThan(m2)) {
+  add(m: Money) {
+    return Money.createFromCents(this._amountInCents + m.amountInCents)
+  }
+
+  subtract(m: Money) {
+    if (this.lessThan(m)) {
       throw new Error('cannot subtract more money than there currently is')
     }
 
-    return Money.createFromCents(m1.amountInCents - m2.amountInCents)
+    return Money.createFromCents(this._amountInCents - m.amountInCents)
   }
 
   greaterThan(m: Money) {
@@ -57,5 +66,17 @@ export default class Money {
 
   lessThan(m: Money) {
     return this._amountInCents < m.amountInCents
+  }
+
+  moreOrEqualTo(m: Money) {
+    return this._amountInCents >= m.amountInCents
+  }
+
+  lessOrEqualTo(m: Money) {
+    return this._amountInCents <= m.amountInCents
+  }
+
+  equalTo(m: Money) {
+    return this._amountInCents === m.amountInCents
   }
 }

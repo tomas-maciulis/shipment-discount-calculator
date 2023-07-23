@@ -20,7 +20,7 @@ export default class DeliveryOrder {
 
   private _deliveryServiceProviderManager: DeliveryServiceProviderManager
 
-  private _discount = Money.create(0)
+  private _discount: Money
 
   constructor(
     id: number,
@@ -38,6 +38,10 @@ export default class DeliveryOrder {
     this._size = size
     this._date = date
     this._isValid = isValid
+
+    if (isValid) {
+      this._discount = Money.create(0)
+    }
   }
 
   set discount(value: Money) {

@@ -1,5 +1,6 @@
 import DeliveryOrder from './delivery-order.value-object'
 import getLinesOfDataFromFile from '../utils/read-shipment-data-from-file.util'
+import Money from './money.value-object'
 
 export default class ServiceClient {
   private readonly _deliveryOrders: DeliveryOrder[] = []
@@ -14,6 +15,22 @@ export default class ServiceClient {
 
       this._deliveryOrders.push(DeliveryOrder.createFromDataString(id, fileContentLines[i]))
     }
+  }
+
+  get deliveryOrdersAsString() {
+    let result = ''
+
+    for (const order of this._deliveryOrders) {
+      if (order.isValid) {
+        const discount = order.discount.equalTo(Money.create(0)) ? '-' : order.discount.amountString
+
+        result += `${order.dataString} ${order.price.subtract(order.discount).amountString} ${discount}\n`
+      } else {
+        result += `${order.dataString} Ignored\n`
+      }
+    }
+
+    return result
   }
 
   get deliveryOrders() {

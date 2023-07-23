@@ -5,17 +5,23 @@ import DeliveryOrder from '../value-objects/delivery-order.value-object'
 import ServiceClient from '../value-objects/service-client.value-object'
 import Money from '../value-objects/money.value-object'
 import EveryThirdLpShipmentIsFreeOnceAMonth from './discount-rule/every-third-lp-shipment-is-free-once-a-month'
+import DiscountsCannotExceedTenEurosAMonth from './discount-validation-rule/discounts-cannot-exceed-ten-euros-a-month'
+import {DiscountValidationRuleBase} from '../base/discount-validation-rule.base'
 
 export default class DiscountManager {
   private _deliveryServiceProviderManager: DeliveryServiceProviderManager
 
   private _discountRules: DiscountRuleBase[] = []
 
+  private _discountValidationRules: DiscountValidationRuleBase[] = []
+
   constructor() {
     this._deliveryServiceProviderManager = new DeliveryServiceProviderManager()
 
     this.registerDiscountRule(new LowestSmallPackagePrice())
     this.registerDiscountRule(new EveryThirdLpShipmentIsFreeOnceAMonth())
+
+    this.registerDiscountValidationRule(new DiscountsCannotExceedTenEurosAMonth())
   }
 
   applyDiscounts(serviceClient: ServiceClient) {
@@ -28,13 +34,29 @@ export default class DiscountManager {
     let totalDiscount = Money.create(0)
 
     for (const rule of this._discountRules) {
-      totalDiscount = Money.add(totalDiscount, rule.calculateDiscount(serviceClient, deliveryOrder))
+      totalDiscount = totalDiscount.add(rule.calculateDiscount(serviceClient, deliveryOrder))
     }
+
+    totalDiscount = this.validateDiscount(serviceClient, deliveryOrder, totalDiscount)
 
     return totalDiscount
   }
 
+  private validateDiscount(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder, discount: Money) {
+    let validatedDiscount = discount.copy()
+
+    for (const rule of this._discountValidationRules) {
+      validatedDiscount = rule.validate(serviceClient, deliveryOrder, discount)
+    }
+
+    return validatedDiscount
+  }
+
   private registerDiscountRule(rule: DiscountRuleBase) {
     this._discountRules.push(rule)
+  }
+
+  private registerDiscountValidationRule(rule: DiscountValidationRuleBase) {
+    this._discountValidationRules.push(rule)
   }
 }

@@ -9,6 +9,4 @@ const discountManager = new DiscountManager()
 
 discountManager.applyDiscounts(serviceClient)
 
-for (const order of serviceClient.deliveryOrders) {
-  console.log(order.provider?.name, order.size, order.discount)
-}
+console.log(serviceClient.deliveryOrdersAsString)

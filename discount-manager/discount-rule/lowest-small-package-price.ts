@@ -22,7 +22,7 @@ export default class LowestSmallPackagePrice extends DiscountRuleBase {
         continue
       }
 
-      const priceDifference = Money.subtract(servicePrice, providerService.price)
+      const priceDifference = servicePrice.subtract(providerService.price)
 
       if (priceDifference.greaterThan(discount)) {
         discount = priceDifference
