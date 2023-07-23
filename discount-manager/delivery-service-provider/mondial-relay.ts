@@ -4,7 +4,7 @@ import Money from '../../value-objects/money.value-object'
 import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
 
 export default class MondialRelay extends DeliveryServiceProviderBase {
-  protected _name = DeliveryServiceProvider.LP
+  protected _name = DeliveryServiceProvider.MR
 
   constructor() {
     super()

@@ -4,7 +4,7 @@ import MondialRelay from './mondial-relay'
 import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
 
 export default class DeliveryServiceProviderManager {
-  private _deliveryServiceProviders: DeliveryServiceProviderBase[]
+  private _deliveryServiceProviders: DeliveryServiceProviderBase[] = []
 
   constructor() {
     this.registerProvider(new LaPoste())
@@ -27,5 +27,11 @@ export default class DeliveryServiceProviderManager {
     }
 
     return result
+  }
+
+  getProviderByIdOrThrow(id: keyof typeof DeliveryServiceProvider) {
+    const deliveryServiceProviderName = DeliveryServiceProvider[id]
+
+    return this.getProviderByNameOrThrow(deliveryServiceProviderName)
   }
 }

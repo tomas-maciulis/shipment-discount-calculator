@@ -4,7 +4,7 @@ import ParcelType from '../enums/parcel-type.enum'
 import Money from '../value-objects/money.value-object'
 
 export default abstract class DeliveryServiceProviderBase {
-  protected _services: DeliveryService[]
+  protected _services: DeliveryService[] = []
 
   protected abstract _name: DeliveryServiceProvider
 

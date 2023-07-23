@@ -8,58 +8,36 @@ import Money from './money.value-object'
 export default class DeliveryOrder {
   private readonly _isValid: boolean
 
-  private _date: Date
+  private readonly _dataString: string
 
-  private _size: ParcelType
+  private readonly _id: number
 
-  private _provider: DeliveryServiceProviderBase
+  private readonly _date: Date
+
+  private readonly _size: ParcelType
+
+  private readonly _provider: DeliveryServiceProviderBase
 
   private _deliveryServiceProviderManager: DeliveryServiceProviderManager
 
-  private _discount: Money
+  private _discount = Money.create(0)
 
-  constructor(private _data: string) {
+  constructor(
+    id: number,
+    isValid: boolean,
+    dataString: string,
+    date?: Date,
+    size?: ParcelType,
+    provider?: keyof typeof DeliveryServiceProvider,
+  ) {
     this._deliveryServiceProviderManager = new DeliveryServiceProviderManager()
 
-    this._isValid = this.validateData()
-
-    if (this._isValid) {
-      this.setData()
-    }
-  }
-
-  private validateData() {
-    const {date, size, provider} = this.getFields()
-
-    if (isNaN(new Date(date).valueOf())) {
-      return false
-    }
-
-    if (!Object.values(ParcelType).includes(size as any)) {
-      return false
-    }
-
-    if (!Object.values(DeliveryServiceProvider).includes(provider as any)) {
-      return false
-    }
-
-    return true
-  }
-
-  private setData() {
-    const {date, size, provider} = this.getFields()
-
-    this._date = new Date(date)
-    this._size = size as ParcelType
-    this._provider = this._deliveryServiceProviderManager.getProviderByNameOrThrow(provider as DeliveryServiceProvider)
-  }
-
-  private getFields() {
-    const entries = this._data.split(' ')
-
-    const [date, size, provider] = entries
-
-    return {date, size, provider}
+    this._id = id
+    this._provider = provider ? this._deliveryServiceProviderManager.getProviderByIdOrThrow(provider) : undefined
+    this._dataString = dataString
+    this._size = size
+    this._date = date
+    this._isValid = isValid
   }
 
   set discount(value: Money) {
@@ -74,12 +52,16 @@ export default class DeliveryOrder {
     return this._discount
   }
 
-  get data() {
-    return this._data
+  get id() {
+    return this._id
+  }
+
+  get dataString() {
+    return this._dataString
   }
 
   get date() {
-    return this._date
+    return Object.freeze(this._date)
   }
 
   get size() {
@@ -96,5 +78,33 @@ export default class DeliveryOrder {
 
   get isValid() {
     return this._isValid
+  }
+
+  static createFromDataString(id: number, dataString: string) {
+    const entries = dataString.split(' ')
+
+    const date = entries[0]
+    const size = entries[1] as ParcelType
+    const provider = entries[2] as keyof typeof DeliveryServiceProvider
+
+    let isValid = true
+
+    if (isNaN(new Date(date).valueOf())) {
+      isValid = false
+    }
+
+    if (!Object.values(ParcelType).includes(size as any)) {
+      isValid = false
+    }
+
+    if (!Object.keys(DeliveryServiceProvider).includes(provider as keyof typeof DeliveryServiceProvider)) {
+      isValid = false
+    }
+
+    if (!isValid) {
+      return new DeliveryOrder(id, isValid, dataString)
+    }
+
+    return new DeliveryOrder(id, isValid, dataString, new Date(date), size, provider)
   }
 }

@@ -32,7 +32,7 @@ export default class Money {
       throw new Error(`amount must not have more than ${PRECISION} floating point digits`)
     }
 
-    return new Money(amount * 10 ** PRECISION)
+    return new Money(Math.round(amount * 10 ** PRECISION))
   }
 
   static createFromCents(amountInCents: number) {
@@ -45,9 +45,7 @@ export default class Money {
 
   static subtract(m1: Money, m2: Money) {
     if (m1.lessThan(m2)) {
-      throw new Error(
-        `Cannot subtract more money than there currently is. Trying to subtract ${m1.amount} from ${m2.amount}`
-      )
+      throw new Error('cannot subtract more money than there currently is')
     }
 
     return Money.createFromCents(m1.amountInCents - m2.amountInCents)
