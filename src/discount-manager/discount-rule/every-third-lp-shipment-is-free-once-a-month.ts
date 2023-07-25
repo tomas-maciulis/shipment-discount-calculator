@@ -13,11 +13,11 @@ export default class EveryThirdLpShipmentIsFreeOnceAMonth extends DiscountRuleBa
   protected applyRule(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder) {
     let discount = Money.create(0)
 
-    // todo: maybe add this as a utility for ServiceClient
     const largeLpOrdersForTheSameMonth = serviceClient.validDeliveryOrders.filter((o) =>
       this._applicableProviders.includes(o.provider.name)
       && this._applicableParcelTypes.includes(o.size)
       && o.date.getMonth() === deliveryOrder.date.getMonth()
+      && o.date.getFullYear() === deliveryOrder.date.getFullYear()
     )
 
     if (largeLpOrdersForTheSameMonth.length < 3) {
