@@ -36,12 +36,8 @@ export default class DiscountManager {
     for (const rule of this._discountRules) {
       discount = discount.add(rule.calculateDiscount(serviceClient, deliveryOrder))
 
-      if (!discount.equalTo(Money.create(0))) {
-        break
-      }
+      discount = this.validateDiscount(serviceClient, deliveryOrder, discount)
     }
-
-    discount = this.validateDiscount(serviceClient, deliveryOrder, discount)
 
     return discount
   }
