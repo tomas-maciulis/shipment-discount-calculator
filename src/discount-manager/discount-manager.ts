@@ -37,6 +37,10 @@ export default class DiscountManager {
       discount = discount.add(rule.calculateDiscount({serviceClient, deliveryOrder}))
 
       discount = this.validateDiscount({serviceClient, deliveryOrder, discount})
+
+      if (discount.greaterThan(Money.create(0))) {
+        break
+      }
     }
 
     return discount
