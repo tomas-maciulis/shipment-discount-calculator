@@ -1,4 +1,4 @@
-# Discount calculator
+# Shipping price calculator
 
 ## Prerequisites
 
