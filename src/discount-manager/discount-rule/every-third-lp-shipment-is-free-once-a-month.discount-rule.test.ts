@@ -1,4 +1,5 @@
-import EveryThirdLpShipmentIsFreeOnceAMonth from './every-third-lp-shipment-is-free-once-a-month'
+import EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule
+  from './every-third-lp-shipment-is-free-once-a-month.discount-rule'
 import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 import ParcelType from '../../enum/parcel-type.enum'
 import Money from '../../value-object/money.value-object'
@@ -55,14 +56,14 @@ mockServiceClient['_deliveryOrders'] = [
   mockDeliveryOrder4,
 ]
 
-const mockEveryThirdLpShipmentIsFreeOnceAMonth = new EveryThirdLpShipmentIsFreeOnceAMonth()
+const mockEveryThirdLpShipmentIsFreeOnceAMonth = new EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule()
 
 mockEveryThirdLpShipmentIsFreeOnceAMonth['_deliveryServiceProviderManager'] = ({
   // @ts-expect-error
   deliveryServiceProviders: [mockLaPoste]
 })
 
-describe('EveryThirdLpShipmentIsFreeOnceAMonth', () => {
+describe('EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule', () => {
   describe('calculateDiscount()', () => {
     it('should apply discount on the third order', () => {
       const result = mockEveryThirdLpShipmentIsFreeOnceAMonth

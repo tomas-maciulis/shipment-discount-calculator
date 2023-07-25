@@ -1,6 +1,7 @@
 import ServiceClient from '../../entity/service-client.entity'
 import Money from '../../value-object/money.value-object'
-import DiscountsCannotExceedTenEurosAMonth from './discounts-cannot-exceed-ten-euros-a-month'
+import DiscountsCannotExceedTenEurosAMonthDiscountValidationRule
+  from './discounts-cannot-exceed-ten-euros-a-month.discount-validation-rule'
 
 const mockServiceClient = new ServiceClient()
 
@@ -20,9 +21,9 @@ mockServiceClient['_deliveryOrders'] = [
   }
 ]
 
-const discountsCannotExceedTenEurosAMonth = new DiscountsCannotExceedTenEurosAMonth()
+const discountsCannotExceedTenEurosAMonth = new DiscountsCannotExceedTenEurosAMonthDiscountValidationRule()
 
-describe('DiscountsCannotExceedTenEurosAMonth', () => {
+describe('DiscountsCannotExceedTenEurosAMonthDiscountValidationRule', () => {
   describe('validate()', () => {
     it('should not allow more than 10 euros of discounts a month', () => {
       const mockDeliveryOrder = {

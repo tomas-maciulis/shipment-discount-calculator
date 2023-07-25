@@ -3,7 +3,7 @@ import ParcelType from '../../enum/parcel-type.enum'
 import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 import Money from '../../value-object/money.value-object'
 
-export default class EveryThirdLpShipmentIsFreeOnceAMonth extends DiscountRuleBase {
+export default class EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule extends DiscountRuleBase {
   protected _applicableParcelTypes = [ParcelType.L]
 
   protected _applicableProviders = [DeliveryServiceProvider.LP]

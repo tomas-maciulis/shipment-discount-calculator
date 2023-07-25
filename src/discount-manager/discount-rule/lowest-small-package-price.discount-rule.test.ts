@@ -1,4 +1,4 @@
-import LowestSmallPackagePrice from './lowest-small-package-price'
+import LowestSmallPackagePriceDiscountRule from './lowest-small-package-price.discount-rule'
 import Money from '../../value-object/money.value-object'
 import ParcelType from '../../enum/parcel-type.enum'
 
@@ -23,7 +23,7 @@ const mockDeliveryProvider2 = {
   }))
 }
 
-const mockLowestSmallPackagePriceRule = new LowestSmallPackagePrice()
+const mockLowestSmallPackagePriceRule = new LowestSmallPackagePriceDiscountRule()
 
 // @ts-expect-error
 mockLowestSmallPackagePriceRule['_applicableProviders'] = [mockDeliveryProviderName1, mockDeliveryProviderName2]
@@ -33,7 +33,7 @@ mockLowestSmallPackagePriceRule['_deliveryServiceProviderManager'] = {
   deliveryServiceProviders: [mockDeliveryProvider1, mockDeliveryProvider2]
 }
 
-describe('LowestSmallPackagePrice', () => {
+describe('LowestSmallPackagePriceDiscountRule', () => {
   describe('calculateDiscount()', () => {
     it('should pick the lowest small package price from all the delivery service providers', () => {
       const mockDeliveryOrder = {

@@ -1,7 +1,7 @@
 import {DiscountValidationRuleBase, DiscountValidationRuleParams} from '../../base/discount-validation-rule.base'
 import Money from '../../value-object/money.value-object'
 
-export default class DiscountsCannotExceedTenEurosAMonth extends DiscountValidationRuleBase {
+export default class DiscountsCannotExceedTenEurosAMonthDiscountValidationRule extends DiscountValidationRuleBase {
   validate(params: DiscountValidationRuleParams) {
     const {serviceClient, deliveryOrder, discount} = params
 

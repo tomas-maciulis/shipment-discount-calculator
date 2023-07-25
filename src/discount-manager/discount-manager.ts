@@ -1,11 +1,13 @@
 import DeliveryServiceProviderManager from './delivery-service-provider/delivery-service-provider-manager'
 import DiscountRuleBase from '../base/discount-rule.base'
-import LowestSmallPackagePrice from './discount-rule/lowest-small-package-price'
+import LowestSmallPackagePriceDiscountRule from './discount-rule/lowest-small-package-price.discount-rule'
 import DeliveryOrder from '../entity/delivery-order.entity'
 import ServiceClient from '../entity/service-client.entity'
 import Money from '../value-object/money.value-object'
-import EveryThirdLpShipmentIsFreeOnceAMonth from './discount-rule/every-third-lp-shipment-is-free-once-a-month'
-import DiscountsCannotExceedTenEurosAMonth from './discount-validation-rule/discounts-cannot-exceed-ten-euros-a-month'
+import EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule
+  from './discount-rule/every-third-lp-shipment-is-free-once-a-month.discount-rule'
+import DiscountsCannotExceedTenEurosAMonthDiscountValidationRule
+  from './discount-validation-rule/discounts-cannot-exceed-ten-euros-a-month.discount-validation-rule'
 import {DiscountValidationRuleBase, DiscountValidationRuleParams} from '../base/discount-validation-rule.base'
 
 export default class DiscountManager {
@@ -18,10 +20,10 @@ export default class DiscountManager {
   constructor() {
     this._deliveryServiceProviderManager = new DeliveryServiceProviderManager()
 
-    this.registerDiscountRule(new LowestSmallPackagePrice())
-    this.registerDiscountRule(new EveryThirdLpShipmentIsFreeOnceAMonth())
+    this.registerDiscountRule(new LowestSmallPackagePriceDiscountRule())
+    this.registerDiscountRule(new EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule())
 
-    this.registerDiscountValidationRule(new DiscountsCannotExceedTenEurosAMonth())
+    this.registerDiscountValidationRule(new DiscountsCannotExceedTenEurosAMonthDiscountValidationRule())
   }
 
   applyDiscounts(serviceClient: ServiceClient) {
