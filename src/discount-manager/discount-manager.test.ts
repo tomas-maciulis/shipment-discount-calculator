@@ -31,7 +31,6 @@ describe('DiscountManager', () => {
       expect(spyValidateDiscount).toBeCalledTimes(1)
 
       expect(spyApplyRule).toBeCalledWith(mockServiceClient, mockValidDeliveryOrder)
-
       expect(spyValidateDiscount).toBeCalledWith(mockServiceClient, mockValidDeliveryOrder, mockDiscount)
     })
   })
