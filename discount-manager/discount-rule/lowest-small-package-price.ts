@@ -1,9 +1,9 @@
 import DiscountRuleBase from '../../base/discount-rule.base'
-import ParcelType from '../../enums/parcel-type.enum'
-import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
-import DeliveryOrder from '../../value-objects/delivery-order.value-object'
-import Money from '../../value-objects/money.value-object'
-import ServiceClient from '../../value-objects/service-client.value-object'
+import ParcelType from '../../enum/parcel-type.enum'
+import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
+import DeliveryOrder from '../../entity/delivery-order.entity'
+import Money from '../../value-object/money.value-object'
+import ServiceClient from '../../entity/service-client.entity'
 
 export default class LowestSmallPackagePrice extends DiscountRuleBase {
   protected _applicableParcelTypes = [ParcelType.S]

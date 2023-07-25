@@ -1,7 +1,7 @@
 import DeliveryServiceProviderBase from '../../base/delivery-service-provider.base'
-import ParcelType from '../../enums/parcel-type.enum'
-import Money from '../../value-objects/money.value-object'
-import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
+import ParcelType from '../../enum/parcel-type.enum'
+import Money from '../../value-object/money.value-object'
+import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 
 export default class MondialRelay extends DeliveryServiceProviderBase {
   protected _name = DeliveryServiceProvider.MR

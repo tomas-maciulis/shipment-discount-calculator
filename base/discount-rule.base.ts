@@ -1,10 +1,10 @@
-import DeliveryServiceProvider from '../enums/delivery-service-provider.enum'
-import ParcelType from '../enums/parcel-type.enum'
-import DeliveryOrder from '../value-objects/delivery-order.value-object'
-import Money from '../value-objects/money.value-object'
+import DeliveryServiceProvider from '../enum/delivery-service-provider.enum'
+import ParcelType from '../enum/parcel-type.enum'
+import DeliveryOrder from '../entity/delivery-order.entity'
+import Money from '../value-object/money.value-object'
 import DeliveryServiceProviderManager
   from '../discount-manager/delivery-service-provider/delivery-service-provider-manager'
-import ServiceClient from '../value-objects/service-client.value-object'
+import ServiceClient from '../entity/service-client.entity'
 
 export default abstract class DiscountRuleBase {
   protected _deliveryServiceProviderManager: DeliveryServiceProviderManager

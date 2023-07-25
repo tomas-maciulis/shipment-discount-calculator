@@ -1,9 +1,9 @@
-import ParcelType from '../enums/parcel-type.enum'
-import DeliveryServiceProvider from '../enums/delivery-service-provider.enum'
+import ParcelType from '../enum/parcel-type.enum'
+import DeliveryServiceProvider from '../enum/delivery-service-provider.enum'
 import DeliveryServiceProviderManager
   from '../discount-manager/delivery-service-provider/delivery-service-provider-manager'
 import DeliveryServiceProviderBase from '../base/delivery-service-provider.base'
-import Money from './money.value-object'
+import Money from '../value-object/money.value-object'
 
 export default class DeliveryOrder {
   private readonly _isValid: boolean
@@ -22,7 +22,7 @@ export default class DeliveryOrder {
 
   private _discount: Money
 
-  constructor(
+  private constructor(
     id: number,
     isValid: boolean,
     dataString: string,

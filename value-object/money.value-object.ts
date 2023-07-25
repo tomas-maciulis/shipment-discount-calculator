@@ -1,9 +1,8 @@
-import getNumberPrecision from '../utils/get-number-precision.util'
+import getNumberPrecision from '../util/get-number-precision.util'
 
 const PRECISION = 2
 
 export default class Money {
-  // todo: refactor all _x to private javascript props
   private readonly _amountInCents: number
 
   private constructor(amountInCents: number) {
@@ -15,7 +14,7 @@ export default class Money {
       throw new Error('amountInCents must be more than 0')
     }
 
-    this._amountInCents = amountInCents
+    this._amountInCents = Math.abs(amountInCents)
   }
 
   get amount() {

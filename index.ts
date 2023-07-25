@@ -1,5 +1,5 @@
 import DiscountManager from './discount-manager/discount-manager'
-import ServiceClient from './value-objects/service-client.value-object'
+import ServiceClient from './entity/service-client.entity'
 
 const serviceClient = new ServiceClient()
 

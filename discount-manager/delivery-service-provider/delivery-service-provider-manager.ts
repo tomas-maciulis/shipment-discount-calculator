@@ -1,7 +1,7 @@
 import DeliveryServiceProviderBase from '../../base/delivery-service-provider.base'
 import LaPoste from './la-poste'
 import MondialRelay from './mondial-relay'
-import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
+import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 
 export default class DeliveryServiceProviderManager {
   private _deliveryServiceProviders: DeliveryServiceProviderBase[] = []

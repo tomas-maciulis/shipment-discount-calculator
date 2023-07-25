@@ -1,6 +1,6 @@
-import DeliveryOrder from './delivery-order.value-object'
-import getLinesOfDataFromFile from '../utils/read-shipment-data-from-file.util'
-import Money from './money.value-object'
+import DeliveryOrder from './delivery-order.entity'
+import getLinesOfDataFromFile from '../util/read-shipment-data-from-file.util'
+import Money from '../value-object/money.value-object'
 
 export default class ServiceClient {
   private readonly _deliveryOrders: DeliveryOrder[] = []
@@ -31,10 +31,6 @@ export default class ServiceClient {
     }
 
     return result
-  }
-
-  get deliveryOrders() {
-    return Object.freeze(this._deliveryOrders)
   }
 
   get validDeliveryOrders() {

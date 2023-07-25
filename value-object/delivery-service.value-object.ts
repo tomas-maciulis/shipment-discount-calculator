@@ -1,5 +1,5 @@
 import Money from './money.value-object'
-import ParcelType from '../enums/parcel-type.enum'
+import ParcelType from '../enum/parcel-type.enum'
 
 export default class DeliveryService {
   constructor(

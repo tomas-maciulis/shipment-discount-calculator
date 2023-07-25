@@ -1,7 +1,7 @@
-import DeliveryService from '../value-objects/delivery-service.value-object'
-import DeliveryServiceProvider from '../enums/delivery-service-provider.enum'
-import ParcelType from '../enums/parcel-type.enum'
-import Money from '../value-objects/money.value-object'
+import DeliveryService from '../value-object/delivery-service.value-object'
+import DeliveryServiceProvider from '../enum/delivery-service-provider.enum'
+import ParcelType from '../enum/parcel-type.enum'
+import Money from '../value-object/money.value-object'
 
 export default abstract class DeliveryServiceProviderBase {
   protected _services: DeliveryService[] = []

@@ -1,6 +1,6 @@
-import Money from '../../value-objects/money.value-object'
-import ParcelType from '../../enums/parcel-type.enum'
-import DeliveryServiceProvider from '../../enums/delivery-service-provider.enum'
+import Money from '../../value-object/money.value-object'
+import ParcelType from '../../enum/parcel-type.enum'
+import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 import DeliveryServiceProviderBase from '../../base/delivery-service-provider.base'
 
 export default class LaPoste extends DeliveryServiceProviderBase {

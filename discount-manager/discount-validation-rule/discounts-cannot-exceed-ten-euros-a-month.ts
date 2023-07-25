@@ -1,7 +1,7 @@
 import {DiscountValidationRuleBase} from '../../base/discount-validation-rule.base'
-import ServiceClient from '../../value-objects/service-client.value-object'
-import DeliveryOrder from '../../value-objects/delivery-order.value-object'
-import Money from '../../value-objects/money.value-object'
+import ServiceClient from '../../entity/service-client.entity'
+import DeliveryOrder from '../../entity/delivery-order.entity'
+import Money from '../../value-object/money.value-object'
 
 export default class DiscountsCannotExceedTenEurosAMonth extends DiscountValidationRuleBase {
   validate(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder, discount: Money): Money {
