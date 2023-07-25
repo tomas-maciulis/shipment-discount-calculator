@@ -66,17 +66,25 @@ describe('EveryThirdLpShipmentIsFreeOnceAMonth', () => {
   describe('calculateDiscount()', () => {
     it('should apply discount on the third order', () => {
       const result = mockEveryThirdLpShipmentIsFreeOnceAMonth
-        .calculateDiscount(mockServiceClient as any, mockDeliveryOrder3 as any)
-
+        .calculateDiscount({
+          deliveryOrder: mockDeliveryOrder3 as any,
+          serviceClient: mockServiceClient as any,
+        })
       expect(result).toEqual(mockServicePrice)
     })
 
     it('should not apply discount on first or second orders', () => {
       const firstOrderResult = mockEveryThirdLpShipmentIsFreeOnceAMonth
-        .calculateDiscount(mockServiceClient as any, mockDeliveryOrder1 as any)
+        .calculateDiscount({
+          deliveryOrder: mockDeliveryOrder1 as any,
+          serviceClient: mockServiceClient as any,
+        })
 
       const secondOrderResult = mockEveryThirdLpShipmentIsFreeOnceAMonth
-        .calculateDiscount(mockServiceClient as any, mockDeliveryOrder2 as any)
+        .calculateDiscount({
+          deliveryOrder: mockDeliveryOrder2 as any,
+          serviceClient: mockServiceClient as any,
+        })
 
       expect(firstOrderResult).toEqual(Money.create(0))
       expect(secondOrderResult).toEqual(Money.create(0))
@@ -84,7 +92,10 @@ describe('EveryThirdLpShipmentIsFreeOnceAMonth', () => {
 
     it('should not apply discount on fourth order', () => {
       const result = mockEveryThirdLpShipmentIsFreeOnceAMonth
-        .calculateDiscount(mockServiceClient as any, mockDeliveryOrder4 as any)
+        .calculateDiscount({
+          deliveryOrder: mockDeliveryOrder4 as any,
+          serviceClient: mockServiceClient as any,
+        })
 
       expect(result).toEqual(Money.create(0))
     })

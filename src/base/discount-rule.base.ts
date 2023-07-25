@@ -6,6 +6,11 @@ import DeliveryServiceProviderManager
   from '../discount-manager/delivery-service-provider/delivery-service-provider-manager'
 import ServiceClient from '../entity/service-client.entity'
 
+export type RuleParams = {
+  deliveryOrder: DeliveryOrder,
+  serviceClient?: ServiceClient,
+}
+
 export default abstract class DiscountRuleBase {
   protected _deliveryServiceProviderManager: DeliveryServiceProviderManager
 
@@ -17,14 +22,15 @@ export default abstract class DiscountRuleBase {
 
   protected abstract _applicableParcelTypes: ParcelType[]
 
-  // todo: refactor arguments into an object to make it easy to add new data in the future
-  protected abstract applyRule(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder): Money
+  protected abstract applyRule(params: RuleParams): Money
 
-  calculateDiscount(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder) {
+  calculateDiscount(params: RuleParams) {
+    const {deliveryOrder} = params
+
     if (this._applicableParcelTypes.includes(deliveryOrder.size)
       && this._applicableProviders.includes(deliveryOrder.provider.name)
     ) {
-      return this.applyRule(serviceClient, deliveryOrder)
+      return this.applyRule(params)
     }
 
     return Money.create(0)

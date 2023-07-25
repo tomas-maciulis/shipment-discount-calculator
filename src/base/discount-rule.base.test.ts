@@ -32,10 +32,18 @@ describe('DiscountRuleBase', () => {
 
       const spy = jest.spyOn(mockDiscountRule as any, 'applyRule')
 
-      mockDiscountRule.calculateDiscount(mockServiceClient as any, mockDeliveryOrder as any)
+      mockDiscountRule.calculateDiscount({
+        serviceClient: mockServiceClient as any,
+        deliveryOrder: mockDeliveryOrder as any,
+      })
 
       expect(spy).toBeCalledTimes(1)
-      expect(spy).toBeCalledWith(mockServiceClient, mockDeliveryOrder)
+
+      expect(spy).toBeCalledWith(
+        {
+          serviceClient: mockServiceClient,
+          deliveryOrder: mockDeliveryOrder,
+        })
     })
 
     it('should not all the rule if it does not meet the specifications', () => {
@@ -48,9 +56,12 @@ describe('DiscountRuleBase', () => {
 
       const spy = jest.spyOn(mockDiscountRule as any, 'applyRule')
 
-      mockDiscountRule.calculateDiscount(mockServiceClient as any, mockDeliveryOrder as any)
+      mockDiscountRule.calculateDiscount({
+        serviceClient: mockServiceClient as any,
+        deliveryOrder: mockDeliveryOrder as any,
+      })
 
-      expect(spy).toBeCalledTimes(0)
+      expect(spy).not.toBeCalled()
     })
   })
 })

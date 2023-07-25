@@ -42,7 +42,10 @@ describe('LowestSmallPackagePrice', () => {
         provider: mockDeliveryProvider1
       }
 
-      const result = mockLowestSmallPackagePriceRule.calculateDiscount({} as any, mockDeliveryOrder as any)
+      const result = mockLowestSmallPackagePriceRule.calculateDiscount({
+        deliveryOrder: mockDeliveryOrder as any,
+        serviceClient: {} as any,
+      })
 
       expect(result).toEqual(mockHighestSmallDeliveryPrice.subtract(mockLowestSmallDeliveryPrice))
     })

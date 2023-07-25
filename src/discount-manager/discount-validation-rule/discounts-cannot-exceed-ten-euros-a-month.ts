@@ -1,10 +1,10 @@
-import {DiscountValidationRuleBase} from '../../base/discount-validation-rule.base'
-import ServiceClient from '../../entity/service-client.entity'
-import DeliveryOrder from '../../entity/delivery-order.entity'
+import {DiscountValidationRuleBase, DiscountValidationRuleParams} from '../../base/discount-validation-rule.base'
 import Money from '../../value-object/money.value-object'
 
 export default class DiscountsCannotExceedTenEurosAMonth extends DiscountValidationRuleBase {
-  validate(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder, discount: Money): Money {
+  validate(params: DiscountValidationRuleParams) {
+    const {serviceClient, deliveryOrder, discount} = params
+
     const monthlyDiscountCap = Money.create(10)
 
     const discountSumForTheSameMonth = serviceClient.validDeliveryOrders.reduce((sum, d) => {

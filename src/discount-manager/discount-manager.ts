@@ -6,7 +6,7 @@ import ServiceClient from '../entity/service-client.entity'
 import Money from '../value-object/money.value-object'
 import EveryThirdLpShipmentIsFreeOnceAMonth from './discount-rule/every-third-lp-shipment-is-free-once-a-month'
 import DiscountsCannotExceedTenEurosAMonth from './discount-validation-rule/discounts-cannot-exceed-ten-euros-a-month'
-import {DiscountValidationRuleBase} from '../base/discount-validation-rule.base'
+import {DiscountValidationRuleBase, DiscountValidationRuleParams} from '../base/discount-validation-rule.base'
 
 export default class DiscountManager {
   private _deliveryServiceProviderManager: DeliveryServiceProviderManager
@@ -34,19 +34,21 @@ export default class DiscountManager {
     let discount = Money.create(0)
 
     for (const rule of this._discountRules) {
-      discount = discount.add(rule.calculateDiscount(serviceClient, deliveryOrder))
+      discount = discount.add(rule.calculateDiscount({serviceClient, deliveryOrder}))
 
-      discount = this.validateDiscount(serviceClient, deliveryOrder, discount)
+      discount = this.validateDiscount({serviceClient, deliveryOrder, discount})
     }
 
     return discount
   }
 
-  private validateDiscount(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder, discount: Money) {
+  private validateDiscount(params: DiscountValidationRuleParams) {
+    const {discount} = params
+
     let validatedDiscount = discount.copy()
 
     for (const rule of this._discountValidationRules) {
-      validatedDiscount = rule.validate(serviceClient, deliveryOrder, discount)
+      validatedDiscount = rule.validate(params)
     }
 
     return validatedDiscount

@@ -30,10 +30,11 @@ describe('DiscountsCannotExceedTenEurosAMonth', () => {
         date: new Date('2015-02-05'),
       }
 
-      const result = discountsCannotExceedTenEurosAMonth.validate(
-        mockServiceClient as any,
-        mockDeliveryOrder as any,
-        Money.create(5.01),
+      const result = discountsCannotExceedTenEurosAMonth.validate({
+          serviceClient: mockServiceClient as any,
+          deliveryOrder: mockDeliveryOrder as any,
+          discount: Money.create(5.01),
+        }
       )
 
       expect(result).toEqual(Money.create(5))

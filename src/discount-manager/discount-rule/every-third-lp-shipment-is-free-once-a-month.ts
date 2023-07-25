@@ -1,8 +1,6 @@
-import DiscountRuleBase from '../../base/discount-rule.base'
+import DiscountRuleBase, {RuleParams} from '../../base/discount-rule.base'
 import ParcelType from '../../enum/parcel-type.enum'
-import DeliveryOrder from '../../entity/delivery-order.entity'
 import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
-import ServiceClient from '../../entity/service-client.entity'
 import Money from '../../value-object/money.value-object'
 
 export default class EveryThirdLpShipmentIsFreeOnceAMonth extends DiscountRuleBase {
@@ -10,7 +8,9 @@ export default class EveryThirdLpShipmentIsFreeOnceAMonth extends DiscountRuleBa
 
   protected _applicableProviders = [DeliveryServiceProvider.LP]
 
-  protected applyRule(serviceClient: ServiceClient, deliveryOrder: DeliveryOrder) {
+  protected applyRule(params: RuleParams) {
+    const {serviceClient, deliveryOrder} = params
+
     let discount = Money.create(0)
 
     const largeLpOrdersForTheSameMonth = serviceClient.validDeliveryOrders.filter((o) =>
