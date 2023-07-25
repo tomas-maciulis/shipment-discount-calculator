@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "execute": "node dist/index.js",
+    "execute": "node dist/src/index.js",
     "build": "npx tsc",
     "build:watch": "npx tsc --watch",
     "test": "jest",

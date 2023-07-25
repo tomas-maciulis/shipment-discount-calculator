@@ -9,7 +9,6 @@ jest.mock('../../enum/delivery-service-provider.enum', () => (
 
 const mockDeliveryServiceProviderManager = new DeliveryServiceProviderManager()
 
-
 const mockService1Id = 'm1'
 
 const mockService1Name = 'mock1'
