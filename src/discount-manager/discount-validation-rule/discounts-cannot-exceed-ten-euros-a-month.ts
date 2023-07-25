@@ -8,7 +8,9 @@ export default class DiscountsCannotExceedTenEurosAMonth extends DiscountValidat
     const monthlyDiscountCap = Money.create(10)
 
     const discountSumForTheSameMonth = serviceClient.validDeliveryOrders.reduce((sum, d) => {
-      if (d.date.getMonth() === deliveryOrder.date.getMonth()) {
+      if (d.date.getMonth() === deliveryOrder.date.getMonth()
+        && d.date.getFullYear() === deliveryOrder.date.getFullYear()
+      ) {
         return sum.add(d.discount)
       }
 
