@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* Node.js v20.5.0 (recommended)
+* Node.js (v20.5.0 is recommended)
 * Npm
 
 ## Setup
