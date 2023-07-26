@@ -15,7 +15,7 @@ const mockValidDeliveryOrder = jest.fn()
 mockDiscountManager['_discountRules'] = [mockDiscountRule]
 mockDiscountManager['_discountValidationRules'] = [mockValidationRule]
 
-const mockServiceClient = {
+const mockuser = {
   validDeliveryOrders: [mockValidDeliveryOrder]
 }
 
@@ -25,20 +25,20 @@ describe('DiscountManager', () => {
       const spyApplyRule = jest.spyOn(mockDiscountRule, 'calculateDiscount')
       const spyValidateDiscount = jest.spyOn(mockValidationRule, 'validate')
 
-      mockDiscountManager.applyDiscounts(mockServiceClient as any)
+      mockDiscountManager.applyDiscounts(mockuser as any)
 
       expect(spyApplyRule).toBeCalledTimes(1)
       expect(spyValidateDiscount).toBeCalledTimes(1)
 
       expect(spyApplyRule).toBeCalledWith(
         {
-          serviceClient: mockServiceClient,
+          user: mockuser,
           deliveryOrder: mockValidDeliveryOrder,
         })
 
       expect(spyValidateDiscount).toBeCalledWith(
         {
-          serviceClient: mockServiceClient,
+          user: mockuser,
           deliveryOrder: mockValidDeliveryOrder,
           discount: mockDiscount,
         })

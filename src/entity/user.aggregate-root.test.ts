@@ -1,4 +1,4 @@
-import ServiceClient from './service-client.entity'
+import User from './user.aggregate-root'
 import DeliveryOrder from './delivery-order.entity'
 import Money from '../value-object/money.value-object'
 
@@ -19,7 +19,7 @@ const mockDeliveryOrderStrings = [
 
 readShipmentDataFromFileMock.default.mockImplementation(() => mockDeliveryOrderStrings)
 
-describe('ServiceClient', () => {
+describe('User', () => {
   describe('addDeliveryOrdersFromDataFile()', () => {
     it('should add delivery orders from a file', () => {
       deliveryOrderMock.default.createFromDataString.mockImplementation((id: number, dataString: string) => ({
@@ -28,13 +28,13 @@ describe('ServiceClient', () => {
 
       const spy = jest.spyOn(DeliveryOrder, 'createFromDataString')
 
-      const serviceClient = new ServiceClient()
+      const user = new User()
 
-      serviceClient.addDeliveryOrdersFromDataFile('mock')
+      user.addDeliveryOrdersFromDataFile('mock')
 
       expect(spy).toBeCalledTimes(3)
 
-      expect(serviceClient).toMatchObject({
+      expect(user).toMatchObject({
         _deliveryOrders: [
           {id: 0, dataString: mockDeliveryOrderStrings[0]},
           {id: 1, dataString: mockDeliveryOrderStrings[1]},
@@ -68,11 +68,11 @@ describe('ServiceClient', () => {
         dataString: mockInvalidDeliveryOrderString
       }))
 
-      const serviceClient = new ServiceClient()
+      const user = new User()
 
-      serviceClient.addDeliveryOrdersFromDataFile('mock')
+      user.addDeliveryOrdersFromDataFile('mock')
 
-      expect(serviceClient.deliveryOrdersAsString).toEqual(
+      expect(user.deliveryOrdersAsString).toEqual(
         `${mockDeliveryOrderStrings[0]} ${mockPrice.subtract(mockDiscount).amountString} ${mockDiscount.amountString}\n`
         + `${mockDeliveryOrderStrings[1]} ${mockPrice.amountString} -\n`
         + `${mockDeliveryOrderStrings[2]} Ignored\n`
@@ -94,11 +94,11 @@ describe('ServiceClient', () => {
         isValid: false
       }))
 
-      const serviceClient = new ServiceClient()
+      const user = new User()
 
-      serviceClient.addDeliveryOrdersFromDataFile('mock')
+      user.addDeliveryOrdersFromDataFile('mock')
 
-      expect(serviceClient.validDeliveryOrders).toEqual([
+      expect(user.validDeliveryOrders).toEqual([
         {isValid: true},
         {isValid: true},
       ])

@@ -15,7 +15,7 @@ const mockDiscountRule = new MockDiscountRule()
 
 describe('DiscountRuleBase', () => {
   describe('calculateDiscount', () => {
-    const mockServiceClient = {}
+    const mockuser = {}
 
     beforeEach(() => {
       jest.clearAllMocks()
@@ -33,7 +33,7 @@ describe('DiscountRuleBase', () => {
       const spy = jest.spyOn(mockDiscountRule as any, 'applyRule')
 
       mockDiscountRule.calculateDiscount({
-        serviceClient: mockServiceClient as any,
+        user: mockuser as any,
         deliveryOrder: mockDeliveryOrder as any,
       })
 
@@ -41,7 +41,7 @@ describe('DiscountRuleBase', () => {
 
       expect(spy).toBeCalledWith(
         {
-          serviceClient: mockServiceClient,
+          user: mockuser,
           deliveryOrder: mockDeliveryOrder,
         })
     })
@@ -57,7 +57,7 @@ describe('DiscountRuleBase', () => {
       const spy = jest.spyOn(mockDiscountRule as any, 'applyRule')
 
       mockDiscountRule.calculateDiscount({
-        serviceClient: mockServiceClient as any,
+        user: mockuser as any,
         deliveryOrder: mockDeliveryOrder as any,
       })
 

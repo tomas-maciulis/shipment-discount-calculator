@@ -9,11 +9,11 @@ export default class EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule extends Di
   protected _applicableProviders = [DeliveryServiceProvider.LP]
 
   protected applyRule(params: RuleParams) {
-    const {serviceClient, deliveryOrder} = params
+    const {user, deliveryOrder} = params
 
     let discount = Money.create(0)
 
-    const largeLpOrdersForTheSameMonth = serviceClient.validDeliveryOrders.filter((o) =>
+    const largeLpOrdersForTheSameMonth = user.validDeliveryOrders.filter((o) =>
       this._applicableProviders.includes(o.provider.name)
       && this._applicableParcelTypes.includes(o.size)
       && o.date.getMonth() === deliveryOrder.date.getMonth()

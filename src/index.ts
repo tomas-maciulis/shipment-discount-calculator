@@ -1,7 +1,7 @@
 import DiscountManager from './discount-manager/discount-manager'
-import ServiceClient from './entity/service-client.entity'
+import User from './entity/user.aggregate-root'
 
-const serviceClient = new ServiceClient()
+const serviceClient = new User()
 const discountManager = new DiscountManager()
 
 serviceClient.addDeliveryOrdersFromDataFile(process.argv[2] ?? 'input.txt')

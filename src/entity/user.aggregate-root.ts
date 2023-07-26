@@ -2,7 +2,7 @@ import DeliveryOrder from './delivery-order.entity'
 import getLinesOfDataFromFile from '../util/read-shipment-data-from-file.util'
 import Money from '../value-object/money.value-object'
 
-export default class ServiceClient {
+export default class User {
   private readonly _deliveryOrders: DeliveryOrder[] = []
 
   addDeliveryOrdersFromDataFile(fileDir: string) {

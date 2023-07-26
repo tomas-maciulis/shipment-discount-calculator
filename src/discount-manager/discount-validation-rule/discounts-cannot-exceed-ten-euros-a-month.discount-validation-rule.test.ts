@@ -1,12 +1,12 @@
-import ServiceClient from '../../entity/service-client.entity'
+import User from '../../entity/user.aggregate-root'
 import Money from '../../value-object/money.value-object'
 import DiscountsCannotExceedTenEurosAMonthDiscountValidationRule
   from './discounts-cannot-exceed-ten-euros-a-month.discount-validation-rule'
 
-const mockServiceClient = new ServiceClient()
+const mockUser = new User()
 
 // @ts-expect-error
-mockServiceClient['_deliveryOrders'] = [
+mockUser['_deliveryOrders'] = [
   {
     id: 0,
     isValid: true,
@@ -32,7 +32,7 @@ describe('DiscountsCannotExceedTenEurosAMonthDiscountValidationRule', () => {
       }
 
       const result = discountsCannotExceedTenEurosAMonth.validate({
-          serviceClient: mockServiceClient as any,
+          user: mockUser as any,
           deliveryOrder: mockDeliveryOrder as any,
           discount: Money.create(5.01),
         }

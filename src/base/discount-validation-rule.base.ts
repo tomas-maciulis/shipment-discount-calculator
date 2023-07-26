@@ -1,9 +1,9 @@
 import Money from '../value-object/money.value-object'
-import ServiceClient from '../entity/service-client.entity'
+import User from '../entity/user.aggregate-root'
 import DeliveryOrder from '../entity/delivery-order.entity'
 
 export type DiscountValidationRuleParams = {
-  serviceClient: ServiceClient,
+  user: User,
   deliveryOrder: DeliveryOrder,
   discount: Money,
 }

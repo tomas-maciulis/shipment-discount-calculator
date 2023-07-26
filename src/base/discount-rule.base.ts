@@ -4,11 +4,11 @@ import DeliveryOrder from '../entity/delivery-order.entity'
 import Money from '../value-object/money.value-object'
 import DeliveryServiceProviderManager
   from '../discount-manager/delivery-service-provider/delivery-service-provider-manager'
-import ServiceClient from '../entity/service-client.entity'
+import User from '../entity/user.aggregate-root'
 
 export type RuleParams = {
   deliveryOrder: DeliveryOrder,
-  serviceClient?: ServiceClient,
+  user?: User,
 }
 
 export default abstract class DiscountRuleBase {

@@ -3,7 +3,7 @@ import EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule
 import DeliveryServiceProvider from '../../enum/delivery-service-provider.enum'
 import ParcelType from '../../enum/parcel-type.enum'
 import Money from '../../value-object/money.value-object'
-import ServiceClient from '../../entity/service-client.entity'
+import User from '../../entity/user.aggregate-root'
 
 const mockServicePrice = Money.create(5)
 
@@ -47,9 +47,9 @@ const mockDeliveryOrder4 = {
   date: new Date('2015-02-26'),
 }
 
-const mockServiceClient = new ServiceClient()
+const mockUser = new User()
 // @ts-expect-error
-mockServiceClient['_deliveryOrders'] = [
+mockUser['_deliveryOrders'] = [
   mockDeliveryOrder1,
   mockDeliveryOrder2,
   mockDeliveryOrder3,
@@ -69,7 +69,7 @@ describe('EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule', () => {
       const result = mockEveryThirdLpShipmentIsFreeOnceAMonth
         .calculateDiscount({
           deliveryOrder: mockDeliveryOrder3 as any,
-          serviceClient: mockServiceClient as any,
+          user: mockUser as any,
         })
       expect(result).toEqual(mockServicePrice)
     })
@@ -78,13 +78,13 @@ describe('EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule', () => {
       const firstOrderResult = mockEveryThirdLpShipmentIsFreeOnceAMonth
         .calculateDiscount({
           deliveryOrder: mockDeliveryOrder1 as any,
-          serviceClient: mockServiceClient as any,
+          user: mockUser as any,
         })
 
       const secondOrderResult = mockEveryThirdLpShipmentIsFreeOnceAMonth
         .calculateDiscount({
           deliveryOrder: mockDeliveryOrder2 as any,
-          serviceClient: mockServiceClient as any,
+          user: mockUser as any,
         })
 
       expect(firstOrderResult).toEqual(Money.create(0))
@@ -95,7 +95,7 @@ describe('EveryThirdLpShipmentIsFreeOnceAMonthDiscountRule', () => {
       const result = mockEveryThirdLpShipmentIsFreeOnceAMonth
         .calculateDiscount({
           deliveryOrder: mockDeliveryOrder4 as any,
-          serviceClient: mockServiceClient as any,
+          user: mockUser as any,
         })
 
       expect(result).toEqual(Money.create(0))
